@@ -1,0 +1,111 @@
+#header {
+  height: 100vh;
+  background-image: url("../assets/img/wave.png"), $body;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-blend-mode: color-burn;
+  background-position: left center;
+  position: relative;
+  padding-bottom: 40px;
+
+  .title {
+    font-size: 3em;
+  }
+
+  .description {
+    line-height: 22px;
+  }
+
+  .border-btn {
+    color: $color;
+    border: 1px solid $primary;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    font-size: 1.5em;
+    padding: 4px 25px;
+    box-shadow: 0 0 15px rgba($primary, 0.2);
+    margin-top: 20px;
+    transition: all 0.5s;
+    z-index: 1;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 100%;
+      bottom: 0;
+      background-color: $primary;
+      transition: all 0.5s;
+      z-index: -1;
+    }
+
+    &:hover::before {
+      right: 0;
+    }
+  }
+
+  .contact {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    ul {
+      display: flex;
+      justify-content: center;
+    }
+    li {
+      border: 1px solid $primary;
+      margin-bottom: 10px;
+      margin-right: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      transition: 0.5s;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $primary;
+        a {
+          color: $color;
+        }
+      }
+    }
+  }
+
+  .animate {
+    animation: top-down 2s ease-in-out 0;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+
+  @include media-breakpoint-down(lg) {
+    min-height: 100vh;
+    height: auto;
+    .title {
+      font-size: 2.5em;
+    }
+    .border-btn {
+      font-size: 1.3em;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    .title {
+      font-size: 2em;
+    }
+  }
+}
+
+@keyframes top-down {
+  form {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-20px);
+  }
+}

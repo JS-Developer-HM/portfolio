@@ -1,30 +1,54 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="root" v-if="reactive.data.length">
+    <the-header></the-header>
+    <my-portfolio></my-portfolio>
   </div>
-  <router-view />
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import firebase from "firebase/app";
 
-#nav {
-  padding: 30px;
+import "firebase/auth";
+import "firebase/database";
+import "firebase/storage";
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+var firebaseConfig = {
+  apiKey: "AIzaSyDOKGLDvhxAy_rsCl8_jf_Kk8MP7sIl8hc",
+  authDomain: "portfolio-d4ebf.firebaseapp.com",
+  databaseURL: "https://portfolio-d4ebf-default-rtdb.firebaseio.com",
+  projectId: "portfolio-d4ebf",
+  storageBucket: "portfolio-d4ebf.appspot.com",
+  messagingSenderId: "112231391662",
+  appId: "1:112231391662:web:f7ddd2264fc1f83278683f",
+};
+// Intialize Firebase
+firebase.initializeApp(firebaseConfig);
+var database = firebase.database();
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+import TheHeader from "./components/header";
+import MyPortfolio from "./components/portfolio";
+export default {
+  components: { TheHeader, MyPortfolio },
+  provide() {
+    return {
+      reactive: this.reactive,
+    };
+  },
+
+  data() {
+    return {
+      reactive: {
+        data: [],
+      },
+    };
+  },
+  created() {
+    database
+      .ref("data")
+      .once("value")
+      .then((data) => {
+        this.reactive.data = data.val().filter((e) => e);
+      });
+  },
+};
+</script>

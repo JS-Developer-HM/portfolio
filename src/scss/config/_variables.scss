@@ -1,0 +1,18 @@
+$body: linear-gradient(90deg, rgba(61, 6, 95, 1) 0%, rgba(16, 5, 77, 1) 100%);
+$color: #ffffff;
+$primary: #dc3daa;
+$secondary: #c7bcd6;
+
+$facebook: #3b5999;
+$twitter: #55acee;
+$linked-in: #0077b5;
+$instagram: #e4405f;
+$whatsapp: #25d366;
+
+$social: (
+  facebook: $facebook,
+  twitter: $twitter,
+  linked-in: $linked-in,
+  instagram: $instagram,
+  whatsapp: $whatsapp,
+);
